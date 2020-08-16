@@ -1,3 +1,4 @@
+from matplotlib import pyplot as plt
 import time
 
 def extractor(filename):
@@ -17,10 +18,14 @@ def program(filename):
     content = extractor(filename+'.csv')
     larger = max(i for i in content)
     finish=str((time.time() - start)*1000)
-    output(filename, str(larger) + '\n', str(finish)) 
+    output(filename, str(larger) + '\n', str(finish))
+    return finish
 
-program('dataset-2-a')
-program('dataset-2-b')
-program('dataset-2-c')
-program('dataset-2-d')
-program('dataset-2-e')
+def plot():
+    datasets = ['a', 'b', 'c', 'd', 'e']
+    times = [float(program('dataset-2-'+i)) for i in datasets]
+    plt.plot(datasets, times)
+    print(times)
+    plt.show()    
+
+plot()
